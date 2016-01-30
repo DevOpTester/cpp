@@ -1,3 +1,5 @@
+language: cpp
+
 # OSX/Linux (https://github.com/travis-ci-tester/toolchain-table)
 
 os:
@@ -107,8 +109,10 @@ matrix:
     - os: osx
       env: TOOLCHAIN=sanitize-thread CONFIG=Debug
 
+#before_install:
+# - "sudo apt-get update -qq"
+
 install:
-  - ./ci/install-deps.sh
 
   # Installed by install-deps.sh if platform is Linux;
   # (directory doesn't exist for OSX)
