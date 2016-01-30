@@ -1,165 +1,127 @@
-#sourced orginal settings from Catch project
-# See  https://github.com/philsquared/Catch
-language: cpp
-sudo: false
+# OSX/Linux (https://github.com/travis-ci-tester/toolchain-table)
 
-cache:
-  ccache: true
-  directories:
-    - $HOME/.ccache
+os:
+  - linux
+  - osx
+
+# Container-based infrastructure (Linux)
+# * https://docs.travis-ci.com/user/migrating-from-legacy/#How-can-I-use-container-based-infrastructure%3F
+sudo:
+  - false
+
+# Install packages differs for container-based infrastructure
+# * https://docs.travis-ci.com/user/migrating-from-legacy/#How-do-I-install-APT-sources-and-packages%3F
+# * http://stackoverflow.com/a/30925448/2288008
+
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+      - cmake
+      - python3
+
+      # https://github.com/travis-ci-tester/travis-test-clang-cxx-11
+      - libstdc++-4.8-dev
+
+      # https://github.com/travis-ci-tester/travis-test-gcc-cxx-11
+      - g++-4.8
 
 env:
-  global:
-    - USE_CCACHE=1
-    - CCACHE_COMPRESS=1
-    - CCACHE_MAXSIZE=200M
-    - CCACHE_CPP2=1
-
+  - TOOLCHAIN=default CONFIG=Release
+  - TOOLCHAIN=default CONFIG=Debug
+  - TOOLCHAIN=libcxx CONFIG=Debug
+  - TOOLCHAIN=libcxx CONFIG=Release
+  - TOOLCHAIN=clang-libstdcxx CONFIG=Release
+  - TOOLCHAIN=clang-libstdcxx CONFIG=Debug
+  - TOOLCHAIN=xcode CONFIG=Debug
+  - TOOLCHAIN=xcode CONFIG=Release
+  - TOOLCHAIN=osx-10-9 CONFIG=Debug
+  - TOOLCHAIN=osx-10-9 CONFIG=Release
+  - TOOLCHAIN=gcc CONFIG=Debug
+  - TOOLCHAIN=gcc CONFIG=Release
+  - TOOLCHAIN=gcc-4-8 CONFIG=Release
+  - TOOLCHAIN=gcc-4-8 CONFIG=Debug
+  - TOOLCHAIN=ios-nocodesign CONFIG=Debug EXTRA="--iossim"
+  - TOOLCHAIN=ios-nocodesign CONFIG=Release EXTRA="--iossim"
+  - TOOLCHAIN=android-ndk-r10e-api-19-armeabi-v7a-neon CONFIG=Release
+  - TOOLCHAIN=android-ndk-r10e-api-19-armeabi-v7a-neon CONFIG=Debug
+  - TOOLCHAIN=analyze CONFIG=Release
+  - TOOLCHAIN=analyze CONFIG=Debug
+  - TOOLCHAIN=sanitize-address CONFIG=Release
+  - TOOLCHAIN=sanitize-address CONFIG=Debug
+  - TOOLCHAIN=sanitize-leak CONFIG=Release
+  - TOOLCHAIN=sanitize-leak CONFIG=Debug
+  - TOOLCHAIN=sanitize-thread CONFIG=Release
+  - TOOLCHAIN=sanitize-thread CONFIG=Debug
 
 matrix:
-  include:
-
-    # 1/ Linux Clang Builds
+  exclude:
+    ### Linux excludes ###
+    # https://github.com/travis-ci-tester/travis-test-clang-with-libcxx
     - os: linux
-      compiler: clang
-      addons: &clang35
-        apt:
-          sources: ['llvm-toolchain-precise-3.5', 'ubuntu-toolchain-r-test']
-          packages: ['clang-3.5']
-      env: COMPILER='ccache clang++-3.5' BUILD_TYPE='Release'
-
+      env: TOOLCHAIN=libcxx CONFIG=Debug
     - os: linux
-      compiler: clang
-      addons: *clang35
-      env: COMPILER='ccache clang++-3.5' BUILD_TYPE='Debug'
+      env: TOOLCHAIN=libcxx CONFIG=Release
 
-
+    # Xcode is for OSX only
     - os: linux
-      compiler: clang
-      addons: &clang36
-        apt:
-          sources: ['llvm-toolchain-precise-3.6', 'ubuntu-toolchain-r-test']
-          packages: ['clang-3.6']
-      env: COMPILER='ccache clang++-3.6' BUILD_TYPE='Release'
-
+      env: TOOLCHAIN=xcode CONFIG=Debug
     - os: linux
-      compiler: clang
-      addons: *clang36
-      env: COMPILER='ccache clang++-3.6' BUILD_TYPE='Debug'
-
-
+      env: TOOLCHAIN=xcode CONFIG=Release
     - os: linux
-      compiler: clang
-      addons: &clang37
-        apt:
-          sources: ['llvm-toolchain-precise-3.7', 'ubuntu-toolchain-r-test']
-          packages: ['clang-3.7']
-      env: COMPILER='ccache clang++-3.7' BUILD_TYPE='Release'
-
+      env: TOOLCHAIN=osx-10-9 CONFIG=Debug
     - os: linux
-      compiler: clang
-      addons: *clang37
-      env: COMPILER='ccache clang++-3.7' BUILD_TYPE='Debug'
-
-
+      env: TOOLCHAIN=osx-10-9 CONFIG=Release
     - os: linux
-      compiler: clang
-      addons: &clang38
-        apt:
-          sources: ['llvm-toolchain-precise', 'ubuntu-toolchain-r-test']
-          packages: ['clang-3.8']
-      env: COMPILER='ccache clang++-3.8' BUILD_TYPE='Release'
-
+      env: TOOLCHAIN=ios-nocodesign CONFIG=Debug EXTRA="--iossim"
     - os: linux
-      compiler: clang
-      addons: *clang38
-      env: COMPILER='ccache clang++-3.8' BUILD_TYPE='Debug'
+      env: TOOLCHAIN=ios-nocodesign CONFIG=Release EXTRA="--iossim"
 
-
-    # 2/ Linux GCC Builds
+    # https://github.com/travis-ci-tester/travis-test-gcc-cxx-11
     - os: linux
-      compiler: gcc
-      addons: &gcc48
-        apt:
-         sources: ['ubuntu-toolchain-r-test']
-         packages: ['g++-4.8']
-      env: COMPILER='ccache g++-4.8' BUILD_TYPE='Release'
-
+      env: TOOLCHAIN=gcc CONFIG=Debug
     - os: linux
-      compiler: gcc
-      addons: *gcc48
-      env: COMPILER='ccache g++-4.8' BUILD_TYPE='Debug'
+      env: TOOLCHAIN=gcc CONFIG=Release
 
-
-    - os: linux
-      compiler: gcc
-      addons: &gcc49
-        apt:
-          sources: ['ubuntu-toolchain-r-test']
-          packages: ['g++-4.9']
-      env: COMPILER='ccache g++-4.9' BUILD_TYPE='Release'
-
-    - os: linux
-      compiler: gcc
-      addons: *gcc49
-      env: COMPILER='ccache g++-4.9' BUILD_TYPE='Debug'
-
-
-    - os: linux
-      compiler: gcc
-      addons: &gcc5
-        apt:
-          sources: ['ubuntu-toolchain-r-test']
-          packages: ['g++-5']
-      env: COMPILER='ccache g++-5' BUILD_TYPE='Release'
-
-    - os: linux
-      compiler: gcc
-      addons: *gcc5
-      env: COMPILER='ccache g++-5' BUILD_TYPE='Debug'
-
-
-    # 3/ OSX Clang Builds
+    ### OSX excludes ###
+    # TOOLCHAIN=gcc works fine on OSX
     - os: osx
-      osx_image: xcode6.4
-      compiler: clang
-      env: COMPILER='ccache clang++' BUILD_TYPE='Debug'
-
+      env: TOOLCHAIN=gcc-4-8 CONFIG=Debug
     - os: osx
-      osx_image: xcode6.4
-      compiler: clang
-      env: COMPILER='ccache clang++' BUILD_TYPE='Release'
+      env: TOOLCHAIN=gcc-4-8 CONFIG=Release
 
-
+    # https://github.com/travis-ci-tester/travis-test-mac-clang-address-sanitizer
     - os: osx
-      osx_image: xcode7
-      compiler: clang
-      env: COMPILER='ccache clang++' BUILD_TYPE='Debug'
-
+      env: TOOLCHAIN=sanitize-address CONFIG=Release
     - os: osx
-      osx_image: xcode7
-      compiler: clang
-      env: COMPILER='ccache clang++' BUILD_TYPE='Release'
+      env: TOOLCHAIN=sanitize-address CONFIG=Debug
 
+    # Linux only
+    - os: osx
+      env: TOOLCHAIN=sanitize-leak CONFIG=Release
+    - os: osx
+      env: TOOLCHAIN=sanitize-leak CONFIG=Debug
+    - os: osx
+      env: TOOLCHAIN=sanitize-thread CONFIG=Release
+    - os: osx
+      env: TOOLCHAIN=sanitize-thread CONFIG=Debug
 
 install:
-  - DEPS_DIR="${TRAVIS_BUILD_DIR}/deps"
-  - mkdir -p ${DEPS_DIR} && cd ${DEPS_DIR}
-  - |
-    if [[ "${TRAVIS_OS_NAME}" == "linux" ]]; then
-      CMAKE_URL="http://www.cmake.org/files/v3.3/cmake-3.3.2-Linux-x86_64.tar.gz"
-      mkdir cmake && travis_retry wget --quiet -O - ${CMAKE_URL} | tar --strip-components=1 -xz -C cmake
-#      export PATH=${DEPS_DIR}/cmake/bin:${PATH}
-    elif [[ "${TRAVIS_OS_NAME}" == "osx" ]]; then
-      brew install cmake ccache
-    fi
+  - ./ci/install-deps.sh
 
-before_script:
-  - export CXX=${COMPILER}
-  - cd ${TRAVIS_BUILD_DIR}
-  - cmake -Hprojects/CMake -BBuild -DCMAKE_BUILD_TYPE=${BUILD_TYPE}
-  - cd Build
+  # Installed by install-deps.sh if platform is Linux;
+  # (directory doesn't exist for OSX)
+  - export PATH="`pwd`/cmake-3.4.0-Linux-x86_64/bin:${PATH}"
 
-script:
- # - make -j 2
- # - ctest -V -j 2
+  # Installed by install-deps.sh if platform is OSX;
+  # (directory doesn't exist for Linux)
+  - export PATH="`pwd`/cmake-3.3.2-Darwin-x86_64/bin:${PATH}"
+
+  # Check versions of tools
+  - which cmake
+  - cmake --version
+  - which python3
+  - python3 --version
+
+#script:
