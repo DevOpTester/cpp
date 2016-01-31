@@ -1,131 +1,29 @@
 language: cpp
+compiler:
+  - gcc
+  - clang
+before_install:
+  - echo "yes" | sudo add-apt-repository ppa:kalakris/cmake
+  - echo "yes" | sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
+  - sudo apt-get update -qq
+  - sudo apt-get install -qq
+  - sudo apt-get install cmake
+  # g++4.8.1
+  - if [ "$CXX" == "g++" ]; then sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test; fi
 
-# OSX/Linux (https://github.com/travis-ci-tester/toolchain-table)
+  # clang 3.4
+  - if [ "$CXX" == "clang++" ]; then sudo add-apt-repository -y ppa:h-rayflood/llvm; fi
 
-os:
-  - linux
-  - osx
-
-# Container-based infrastructure (Linux)
-# * https://docs.travis-ci.com/user/migrating-from-legacy/#How-can-I-use-container-based-infrastructure%3F
-sudo:
-  - false
-
-# Install packages differs for container-based infrastructure
-# * https://docs.travis-ci.com/user/migrating-from-legacy/#How-do-I-install-APT-sources-and-packages%3F
-# * http://stackoverflow.com/a/30925448/2288008
-
-addons:
-  apt:
-    sources:
-      - ubuntu-toolchain-r-test
-    packages:
-      - cmake
-      - python3
-
-      # https://github.com/travis-ci-tester/travis-test-clang-cxx-11
-      - libstdc++-4.8-dev
-
-      # https://github.com/travis-ci-tester/travis-test-gcc-cxx-11
-      - g++-4.8
-
-env:
-  - TOOLCHAIN=default CONFIG=Release
-  - TOOLCHAIN=default CONFIG=Debug
-  - TOOLCHAIN=libcxx CONFIG=Debug
-  - TOOLCHAIN=libcxx CONFIG=Release
-  - TOOLCHAIN=clang-libstdcxx CONFIG=Release
-  - TOOLCHAIN=clang-libstdcxx CONFIG=Debug
-  - TOOLCHAIN=xcode CONFIG=Debug
-  - TOOLCHAIN=xcode CONFIG=Release
-  - TOOLCHAIN=osx-10-9 CONFIG=Debug
-  - TOOLCHAIN=osx-10-9 CONFIG=Release
-  - TOOLCHAIN=gcc CONFIG=Debug
-  - TOOLCHAIN=gcc CONFIG=Release
-  - TOOLCHAIN=gcc-4-8 CONFIG=Release
-  - TOOLCHAIN=gcc-4-8 CONFIG=Debug
-  - TOOLCHAIN=ios-nocodesign CONFIG=Debug EXTRA="--iossim"
-  - TOOLCHAIN=ios-nocodesign CONFIG=Release EXTRA="--iossim"
-  - TOOLCHAIN=android-ndk-r10e-api-19-armeabi-v7a-neon CONFIG=Release
-  - TOOLCHAIN=android-ndk-r10e-api-19-armeabi-v7a-neon CONFIG=Debug
-  - TOOLCHAIN=analyze CONFIG=Release
-  - TOOLCHAIN=analyze CONFIG=Debug
-  - TOOLCHAIN=sanitize-address CONFIG=Release
-  - TOOLCHAIN=sanitize-address CONFIG=Debug
-  - TOOLCHAIN=sanitize-leak CONFIG=Release
-  - TOOLCHAIN=sanitize-leak CONFIG=Debug
-  - TOOLCHAIN=sanitize-thread CONFIG=Release
-  - TOOLCHAIN=sanitize-thread CONFIG=Debug
-
-matrix:
-  exclude:
-    ### Linux excludes ###
-    # https://github.com/travis-ci-tester/travis-test-clang-with-libcxx
-    - os: linux
-      env: TOOLCHAIN=libcxx CONFIG=Debug
-    - os: linux
-      env: TOOLCHAIN=libcxx CONFIG=Release
-
-    # Xcode is for OSX only
-    - os: linux
-      env: TOOLCHAIN=xcode CONFIG=Debug
-    - os: linux
-      env: TOOLCHAIN=xcode CONFIG=Release
-    - os: linux
-      env: TOOLCHAIN=osx-10-9 CONFIG=Debug
-    - os: linux
-      env: TOOLCHAIN=osx-10-9 CONFIG=Release
-    - os: linux
-      env: TOOLCHAIN=ios-nocodesign CONFIG=Debug EXTRA="--iossim"
-    - os: linux
-      env: TOOLCHAIN=ios-nocodesign CONFIG=Release EXTRA="--iossim"
-
-    # https://github.com/travis-ci-tester/travis-test-gcc-cxx-11
-    - os: linux
-      env: TOOLCHAIN=gcc CONFIG=Debug
-    - os: linux
-      env: TOOLCHAIN=gcc CONFIG=Release
-
-    ### OSX excludes ###
-    # TOOLCHAIN=gcc works fine on OSX
-    - os: osx
-      env: TOOLCHAIN=gcc-4-8 CONFIG=Debug
-    - os: osx
-      env: TOOLCHAIN=gcc-4-8 CONFIG=Release
-
-    # https://github.com/travis-ci-tester/travis-test-mac-clang-address-sanitizer
-    - os: osx
-      env: TOOLCHAIN=sanitize-address CONFIG=Release
-    - os: osx
-      env: TOOLCHAIN=sanitize-address CONFIG=Debug
-
-    # Linux only
-    - os: osx
-      env: TOOLCHAIN=sanitize-leak CONFIG=Release
-    - os: osx
-      env: TOOLCHAIN=sanitize-leak CONFIG=Debug
-    - os: osx
-      env: TOOLCHAIN=sanitize-thread CONFIG=Release
-    - os: osx
-      env: TOOLCHAIN=sanitize-thread CONFIG=Debug
-
-#before_install:
-# - "sudo apt-get update -qq"
+  - sudo apt-get update -qq
 
 install:
+  # g++4.8.1
+  - if [ "$CXX" = "g++" ]; then sudo apt-get install -qq g++-4.8; fi
+  - if [ "$CXX" = "g++" ]; then export CXX="g++-4.8" CC="gcc-4.8"; fi
+  - if [ "$CXX" = "g++" ]; then sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-4.8 90; fi
+  - if [ "$CXX" = "g++" ]; then sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.8 90; fi
+  - if [ "$CXX" = "g++" ]; then sudo apt-get install libstdc++-4.8-dev; fi
 
-  # Installed by install-deps.sh if platform is Linux;
-  # (directory doesn't exist for OSX)
-  - export PATH="`pwd`/cmake-3.4.0-Linux-x86_64/bin:${PATH}"
-
-  # Installed by install-deps.sh if platform is OSX;
-  # (directory doesn't exist for Linux)
-  - export PATH="`pwd`/cmake-3.3.2-Darwin-x86_64/bin:${PATH}"
-
-  # Check versions of tools
-  - which cmake
-  - cmake --version
-  - which python3
-  - python3 --version
-
-#script:
+  # clang 3.4
+  - if [ "$CXX" == "clang++" ]; then sudo apt-get install --allow-unauthenticated -qq clang-3.4; fi
+  - if [ "$CXX" == "clang++" ]; then export CXX="clang++-3.4"; fi
