@@ -1,6 +1,6 @@
 CFLAGS=-Wall -g
 
-all: hello.cpp Tests/testHello.cpp
-
+all:
+	g++ cpptest.cpp -o cpptest
 clean:
-	rm -f hello.cpp
+	rm -f cpptest
