@@ -1,8 +1,8 @@
 CFLAGS=-Wall -g
 
-linuxcompile:
+gcompile:
 	g++ cpptest.cpp -o cpptest
-osxcompile:
+clangcompile:
 	clang++ cpptest.cpp -o cpptest
 clean:
 	rm -f cpptest
