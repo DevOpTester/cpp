@@ -1,4 +1,10 @@
+
 language: cpp
+
+os:
+  - linux
+  - osx
+
 compiler:
   - gcc
   - clang
@@ -28,6 +34,6 @@ install:
   - if [ "$CXX" == "clang++" ]; then sudo apt-get install --allow-unauthenticated -qq clang-3.4; fi
   - if [ "$CXX" == "clang++" ]; then export CXX="clang++-3.4"; fi
 script:
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then "make linuxcompile"; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then "make osxcompile"; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then make linuxcompile; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then make osxcompile; fi
   - "./cpptest"
