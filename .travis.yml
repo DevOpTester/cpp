@@ -36,7 +36,7 @@ install:
 script:
 #  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then make gcompile; fi
 #  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then make clangcompile; fi
-  - if [ "$CXX" == "g++" ]; then alias compile="make gcompile"; fi
-  - if [ "$CXX" == "clang++" ]; then alias compile="make clangcompile"; fi
-  - "compile"
+#  - if [ "$CXX" == "g++" ]; then alias compile="make gcompile"; fi
+#  - if [ "$CXX" == "clang++" ]; then alias compile="make clangcompile"; fi
+  - "make gcompile clangcompile"
   - "./cpptest"
