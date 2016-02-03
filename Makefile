@@ -1,8 +1,13 @@
 CFLAGS=-Wall -g
 
-gcompile:
-	g++ cpptest.cpp -o cpptest
-clangcompile:
-	clang++ cpptest.cpp -o cpptest
+gmain:
+	g++ main.cpp add.cpp -o add
+
+gtests:
+	g++ catchDef.cpp cpptest.cpp add.cpp -o tests
+	./tests -s
+clangtests:
+	clang++ catchDef.cpp cpptest.cpp add.cpp -o tests
+	./tests -s
 clean:
-	rm -f cpptest
+	rm -f tests add
