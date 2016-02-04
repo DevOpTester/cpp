@@ -4,6 +4,11 @@ language: cpp
 os:
   - linux
   - osx
+
+sudo: required
+
+install:
+  - bash travis_build.sh 
   
 script:
-  - make travis_build
+  - make tests
