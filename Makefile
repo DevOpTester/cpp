@@ -1,7 +1,7 @@
 CFLAGS=-Wall -g
 
 travis:
-	bash travis_build.sh
+	bash ci_build.sh
 main:
 	bash run_main.sh
 tests: 

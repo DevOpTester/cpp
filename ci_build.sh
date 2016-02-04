@@ -38,7 +38,7 @@ function install_osx_dep()
 {
 	if [ $OSTYPE != "linux-gnu" ]; then CXX="clang++"
 	brew update 
-	echo "yes" | brew install llvm --with-clang --with-asan --HEAD; 
+	echo "yes" | brew install llvm --with-clang; 
 	fi
 }
 
@@ -86,6 +86,6 @@ function run_main()
 license_statement
 install_trusty_dep
 install_osx_dep
-#run_tests
-#run_main
-#exit 0
+run_tests
+run_main
+exit 0

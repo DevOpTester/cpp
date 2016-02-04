@@ -1,14 +1,18 @@
-
-language: cpp
+language: 
+  - cpp
 
 os:
   - linux
-  - osx
+# - osx
+
+compiler:
+  - gcc
+#  - clang
 
 sudo: required
 
 install:
-  - bash travis_build.sh 
+  - bash ci_build.sh 
   
 script:
-  - make tests
+  - echo "All done!"
