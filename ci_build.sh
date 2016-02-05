@@ -28,7 +28,7 @@ function install_trusty_dep()
 	sudo apt-get update -qq
 	sudo apt-get install cmake
 	sudo apt-get install gcc-4.8 g++-4.8 -qq
-	sudo apt-get upgrade -qq
+#	sudo apt-get upgrade -qq
 	echo "${CXX} will be your compiler"
 	CXX="g++";
 	fi
