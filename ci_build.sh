@@ -53,7 +53,7 @@ function run_tests()
 	echo "*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~"
 	echo 
 
-	${CXX} catchDef.cpp cpptest.cpp add.cpp -o tests
+	${CXX} catchDef.cpp tests.cpp add.cpp -o tests
 	./tests -s
 	rm "tests"
 }
