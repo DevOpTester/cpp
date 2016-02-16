@@ -6,7 +6,19 @@
 
 TEST_CASE( "Addition of two integers", "[add]" ) {
   REQUIRE( add(1, 1) == 2 );
-    }
+}
+TEST_CASE( "Addition of two doubles", "[add]" ) {
+  double x = 34.0;
+  double y = 72.0;
+  
+  REQUIRE( add(x, y) == 106.0 );
+}
+TEST_CASE( "Addition of two floats", "[add]" ) {
+  double x = 3.0;
+  double y = 7.0;
+  
+  REQUIRE( add(x, y) == 10.0 );
+    }   
 TEST_CASE( "Test <cmath> pow() function", "[cmath]") {
   REQUIRE( pow(100,0) == 1);
 }
