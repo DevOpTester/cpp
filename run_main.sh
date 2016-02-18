@@ -11,7 +11,7 @@ echo "              !!!!!!!Hello this is the main function!!!!!!              "
 echo "*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~"
 echo 
 
-${CXX} main.cpp montecarlopi.cpp  add.cpp -o main
+${CXX} main.cpp approx.cpp  add.cpp -o main
 echo "Compiled. Now run:"
 ./main
 echo "End of run"

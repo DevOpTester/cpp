@@ -1,5 +1,5 @@
-//montecarlopi.cpp
-#include "montecarlopi.h"
+//approx.cpp
+#include "approx.h"
 #include "catch.hpp"
 #include "main.h"
 #include <cstdlib>
@@ -19,3 +19,15 @@ double approx_pi(int n) {
     return 4.0*nin/n;
 }
 
+double square_root(double a) {
+    // a must be greaterthan or equal to 0
+    // using Newton-Raphson method
+    // returns x such that abs(x*x - a) < epsilon
+
+    double x = 1.0; // makes a guess
+
+    // Iterates using Newton-Raphson recurrence
+    while (abs(x*x - a) >= std::numeric_limits<double>::epsilon()) x = 0.5*(x + a/x);
+
+    return x;
+}

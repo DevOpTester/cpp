@@ -2,7 +2,7 @@
 #include "catch.hpp"
 #include "add.h"
 #include "main.h"
-#include "montecarlopi.h"
+#include "approx.h"
 
 
 TEST_CASE( "Addition of two integers", "[add]" ) {
@@ -39,7 +39,13 @@ TEST_CASE( "Test <cmath> isnan()", "[cmath]") {
   REQUIRE( isnan(2.0) == 0);
 }
 TEST_CASE( "Test monte carlo approx_pi function", "[montecarlo]") {
-    REQUIRE( abs(approx_pi(1000) - acos(-1)) < 0.01);
-    REQUIRE( abs(approx_pi(100000) - acos(-1)) < 0.001);
-    REQUIRE( abs(approx_pi(1000000) - acos(-1)) < 0.0001);
+    REQUIRE( std::abs(approx_pi(1000) - acos(-1)) < 0.01);
+    REQUIRE( std::abs(approx_pi(100000) - acos(-1)) < 0.001);
+    REQUIRE( std::abs(approx_pi(1000000) - acos(-1)) < 0.0001);
+}
+
+TEST_CASE( "Test Newton-Raphson square root against <cmath> sqrt()", "[sqrt]") {
+    for (double i = 0.0; i < 200.0; ++i) {
+    REQUIRE( std::abs(square_root(i) - sqrt(i)) < 0.7);
+    }
 }
