@@ -2,6 +2,7 @@
 #include "catch.hpp"
 #include "add.h"
 #include "main.h"
+#include "montecarlopi.h"
 
 
 TEST_CASE( "Addition of two integers", "[add]" ) {
@@ -37,4 +38,8 @@ TEST_CASE( "Test <cmath> cbrt()", "[cmath]") {
 TEST_CASE( "Test <cmath> isnan()", "[cmath]") {
   REQUIRE( isnan(2.0) == 0);
 }
-
+TEST_CASE( "Test monte carlo approx_pi function", "[montecarlo]") {
+    REQUIRE( abs(approx_pi(1000) - acos(-1)) < 0.01);
+    REQUIRE( abs(approx_pi(100000) - acos(-1)) < 0.001);
+    REQUIRE( abs(approx_pi(1000000) - acos(-1)) < 0.0001);
+}
