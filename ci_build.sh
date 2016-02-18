@@ -53,7 +53,7 @@ function run_tests()
 	echo "*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~"
 	echo 
 
-	${CXX} catchDef.cpp tests.cpp add.cpp -o tests
+	${CXX} catchDef.cpp tests.cpp montecarolopi.cpp add.cpp -o tests
 	./tests -s
 	rm "tests"
 }
@@ -73,7 +73,7 @@ function run_main()
 	echo "*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~"
 	echo 
 
-	${CXX} main.cpp add.cpp -o add
+	${CXX} main.cpp montecarlopi.cpp add.cpp -o add
 	echo "Compiled. Now run main:"
 	./add 
 	echo "End of run"
