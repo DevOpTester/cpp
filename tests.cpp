@@ -46,6 +46,8 @@ TEST_CASE( "Test monte carlo approx_pi function", "[montecarlo]") {
 
 TEST_CASE( "Test Newton-Raphson square root against <cmath> sqrt()", "[sqrt]") {
     for (double i = 0.0; i < 200.0; ++i) {
-    REQUIRE( std::abs(square_root(i) - sqrt(i)) < 0.7);
+    REQUIRE( std::abs(square_root(i) - sqrt(i)) < 0.6);
     }
 }
+
+//TEST_CASE( "Test approximation of integral using trapezoidal function" , "[integral]") {}
