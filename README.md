@@ -12,14 +12,11 @@ https://github.com/philsquared/Catch
                             
                                          # TODO
 
-#### *Phase I: prototype*
 
 #### Catch
    - [x] Create simple TEST_CASE () that tests if a function returns expected value
    - [ ] Make use of multiple SECTION () functions within a TEST_CASE ()
-   - [ ] Make use of built in tags for tests that should fail [!fails] and [!mayfail]
-   - [ ] Make use of tags for tests that should throw exceptions [!throws]
-   - [ ] Make use of tags for hiding tests [.] [!hide]
+   - [ ] Make use of tags for hiding tests [.]
    - [ ] Create test case that loads external data and runs tests against it
    - [ ] Build set of tests in BDD style  (SCENARIO() --> WHEN() --> THEN())
 
