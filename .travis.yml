@@ -11,8 +11,6 @@ compiler:
 
 sudo: required
 
-install:
-  - bash ci_build.sh 
-  
 script:
+  - bash ci_build.sh 
   - echo "All done!"
