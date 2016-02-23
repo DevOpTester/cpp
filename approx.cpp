@@ -16,14 +16,6 @@
 
 *************************************************************/
 
-
-
-
-
-
-
-
-
 // monte carlo method for approximating pi
 // takes integer 'n', the number of trials
 // returns an approximation of pi
