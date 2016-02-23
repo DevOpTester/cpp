@@ -22,12 +22,13 @@ function install_trusty_dep()
 	then echo "Installing dependencies for ${OSTYPE}";
 	echo
 	#https://launchpad.net/~plfiorini/+archive/ubuntu/cmake
-	echo "yes" | sudo add-apt-repository ppa:plfiorini/cmake ;
+#	echo "yes" | sudo add-apt-repository ppa:plfiorini/cmake ;
 	#https://wiki.ubuntu.com/ToolChain
-	echo "yes" | sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
-	sudo apt-get update -qq
-	sudo apt-get install cmake
-	sudo apt-get install gcc-4.8 g++-4.8 -qq
+#	echo "yes" | sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
+	time sudo apt-get update -qq
+	time sudo apt-get install cmake
+	time sudo apt-get install gcc-4.8 g++-4.8 -qq
+    time sudo apt-get install gfortran -qq
 #	sudo apt-get upgrade -qq
 	echo "${CXX} will be your compiler"
 	CXX="g++";
