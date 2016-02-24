@@ -26,7 +26,7 @@ cache:
   
 before_install:
     - sudo apt-get update -q
-    - sh ./conf/travis/install-mpi.sh $MPI
+    - sh install-mpi.sh $MPI
 
 sudo: required
 
