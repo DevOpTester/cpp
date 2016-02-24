@@ -3,14 +3,32 @@ language:
 
 os:
   - linux
-# - osx
 
 compiler:
   - gcc
-#  - clang
+
+env:
+    - MPI=mpich3
+    - MPI=mpich2
+    - MPI=mpich1
+    - MPI=openmpi
+    
+matrix:
+  allow_failures:
+    - env: MPI=mpich1
+    
+branches:
+  only:
+    - master
+    - dev
+cache:
+  apt: true
+  
+before_install:
+    - sudo apt-get update -q
+    - sh ./conf/travis/install-mpi.sh $MPI
 
 sudo: required
 
 script:
-  - bash ci_build.sh 
-  - echo "All done!"
+  - bash ci_build.sh
