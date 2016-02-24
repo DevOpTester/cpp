@@ -7,11 +7,14 @@ case $1 in
     sudo apt-get install -q mpich2 libmpich2-3 libmpich2-dev;;
   mpich3) set -x;
     sudo apt-get install -q gfortran libcr0 default-jdk;
-    wget -q http://www.cebacad.net/files/mpich/ubuntu/mpich-3.1/mpich_3.1-1ubuntu_amd64.deb;
-    sudo dpkg -i ./mpich_3.1-1ubuntu_amd64.deb;
-    rm -f ./mpich_3.1-1ubuntu_amd64.deb;;
+    wget http://www.mpich.org/static/downloads/3.2/mpich-3.2.tar.gz;
+    
+    mkdir $HOME/mpich3.2-install;
+    mv mpich-3.2.tar.gz $HOME/mpich3.2-install;
+    ./configure CC=gcc CXX=g++ F77=gfortran FC=gfortran --prefix=$HOME/mpich3.2-install --enable-fast make make install;;
   openmpi) set -x;
-    sudo apt-get install openmpi-bin openmpi-dev;;
+    sudo apt-get install openmpi-bin openmpi-dev
+    export PATH=$HOME/mpich3.1-install/bin:$PATH;;
   *)
     echo "Unknown MPI implementation:" $1; exit 1;;
 esac
