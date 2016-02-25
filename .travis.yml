@@ -8,10 +8,10 @@ compiler:
   - gcc
 
 env:
-    - MPI=mpich3
-    - MPI=mpich2
-    - MPI=mpich1
-    - MPI=openmpi
+#   - MPI=mpich3
+#   - MPI=mpich2
+#   - MPI=mpich1
+#   - MPI=openmpi
     
 matrix:
   allow_failures:
@@ -26,7 +26,7 @@ cache:
   
 before_install:
     - sudo apt-get update -q
-    - sh install-mpi.sh $MPI
+#    - sh install-mpi.sh $MPI
 
 sudo: required
 
