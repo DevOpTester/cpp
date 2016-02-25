@@ -18,15 +18,24 @@ function license_statement()
 
 function install_trusty_dep()
 {
-	if [ "$OSTYPE" = "linux-gnu" ];
-	then echo "Installing dependencies for ${OSTYPE}";
+	echo "========================================="
 	echo
+	echo "Installing dependencies for ${OSTYPE}";
+	echo
+	echo "=========================================="
 	time sudo apt-get update -qq
+	echo "=========================================="
 	time sudo apt-get install cmake
-	time sudo apt-get install gcc-4.8 g++-4.8 -qq
+	echo "=========================================="
+	time sudo apt-get install gcc -qq
+	time sudo apt-get install g++ -qq
+	echo "=========================================="
     time sudo apt-get install gfortran -qq
-    time sudo apt-get install valgrind -qq
+    echo "=========================================="
+    echo "Installing valgrind"
+    sudo apt-get install valgrind -qq
     rm valgrind.log*
+    echo "=========================================="
 	echo "${CXX} will be your compiler"
 	CXX="g++";
 	fi
@@ -60,50 +69,10 @@ function install_trusty_dep()
 	fi
 }
 
-
-function run_tests()
-{
-	if [ $OSTYPE == "linux-gnu" ]; then CXX="g++"; 
-	fi
-	echo
-	echo "*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~"
-	echo "                         Running Catch tests                          "
-	echo "*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~"
-	echo 
-    cd $HOME/testingCPP
-	${CXX} catchDef.cpp tests.cpp approx.cpp add.cpp -o tests
-	./tests -s
-	rm "tests"
-}
-
-function run_main()
-{
-	# Detects operating system type, runs preferred compiler,
-	# executes main program, and cleans up.
-
-	if [ $OSTYPE == "linux-gnu" ]; then CXX="g++"; 
-	fi
-
-	echo
-	echo "*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~"
-	echo "              !!!!!!!Hello this is the main function!!!!!!              "
-	echo "*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~"
-	echo 
-    cd $HOME/testingCPP
-	${CXX} main.cpp approx.cpp add.cpp -o add
-	echo "Compiled. Now run main:"
-	./add 
-	echo "End of run"
-	rm "add"
-	echo "Files cleaned up"
-}
-
 #Call functions
 
 license_statement
 #install_MPI
 install_trusty_dep
 install_PETSc
-run_tests
-run_main
 exit 0

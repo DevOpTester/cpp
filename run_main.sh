@@ -1,3 +1,4 @@
+#!/bin/bash
 # Detects operating system type, runs preferred compiler,
 # executes main program, and cleans up.
 

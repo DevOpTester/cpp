@@ -26,9 +26,9 @@ cache:
   
 before_install:
     - sudo apt-get update -q
-#    - sh install-mpi.sh $MPI
+    - bash ci_build.sh
 
 sudo: required
 
 script:
-  - bash ci_build.sh
+  - bash ci_run.sh
