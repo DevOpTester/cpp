@@ -29,6 +29,8 @@ function install_trusty_dep()
 	time sudo apt-get install cmake
 	time sudo apt-get install gcc-4.8 g++-4.8 -qq
     time sudo apt-get install gfortran -qq
+    time sudo apt-get install valgrind
+    rm valgrind.log*
 #	sudo apt-get upgrade -qq
 	echo "${CXX} will be your compiler"
 	CXX="g++";
@@ -55,7 +57,9 @@ function install_MPI()
             mkdir $HOME/mpich3.2-install;
             mv mpich-3.2.tar.gz $HOME/mpich3.2-install;
             tar xfz $HOME/mpich3.2-install/mpich-3.2.tar.gz
+            cd $HOME/mpich3.2-install/
             ./configure CC=gcc CXX=g++ F77=gfortran FC=gfortran --prefix=$HOME/mpich3.2-install --enable-fast make make install;;
+            cd $HOME/
         openmpi) set -x;
             sudo apt-get install openmpi-bin openmpi-dev
             export PATH=$HOME/mpich3.1-install/bin:$PATH;;
@@ -69,7 +73,8 @@ function install_PETSc()
   time git clone -b maint https://bitbucket.org/petsc/petsc $HOME/petsc
   cd $HOME/petsc/
   time ./configure --with-cc=gcc --with-cxx=g++ --with-fc=gfortran --download-fblaslapack --download-mpich
-  time make all test  
+  time make all test 
+  cd $HOME 
 } 
 
 function install_trusty_dep()
@@ -101,7 +106,7 @@ function run_tests()
 	echo "                         Running Catch tests                          "
 	echo "*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~"
 	echo 
-
+    cd $HOME/testingCPP
 	${CXX} catchDef.cpp tests.cpp approx.cpp add.cpp -o tests
 	./tests -s
 	rm "tests"
@@ -113,7 +118,6 @@ function run_main()
 	# executes main program, and cleans up.
 
 	if [ $OSTYPE == "linux-gnu" ]; then CXX="g++"; 
-	else CXX="clang++"
 	fi
 
 	echo
@@ -121,7 +125,7 @@ function run_main()
 	echo "              !!!!!!!Hello this is the main function!!!!!!              "
 	echo "*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~"
 	echo 
-
+    cd $HOME/testingCPP
 	${CXX} main.cpp approx.cpp add.cpp -o add
 	echo "Compiled. Now run main:"
 	./add 
