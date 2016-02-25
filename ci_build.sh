@@ -25,7 +25,7 @@ function install_trusty_dep()
 	time sudo apt-get install cmake
 	time sudo apt-get install gcc-4.8 g++-4.8 -qq
     time sudo apt-get install gfortran -qq
-    time sudo apt-get install valgrind
+    time sudo apt-get install valgrind -qq
     rm valgrind.log*
 	echo "${CXX} will be your compiler"
 	CXX="g++";
