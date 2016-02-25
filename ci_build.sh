@@ -38,7 +38,6 @@ function install_trusty_dep()
     echo "=========================================="
 	echo "${CXX} will be your compiler"
 	CXX="g++";
-	fi
 }
 
 function install_PETSc()
