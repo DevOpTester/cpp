@@ -134,9 +134,8 @@ function run_main()
 
 license_statement
 #install_MPI
-install_PETSc
 install_trusty_dep
-install_osx_dep
+install_PETSc
 run_tests
 run_main
 exit 0
