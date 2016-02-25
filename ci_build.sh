@@ -66,7 +66,8 @@ function install_MPI()
 
 function install_PETSc()
 {
-  time git clone -b maint https://bitbucket.org/petsc/petsc petsc
+  time git clone -b maint https://bitbucket.org/petsc/petsc $HOME/petsc
+  cd $HOME/petsc/
   time ./configure --with-cc=gcc --with-cxx=g++ --with-fc=gfortran --download-fblaslapack --download-mpich
   time make all test  
 } 
