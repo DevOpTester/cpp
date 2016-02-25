@@ -59,7 +59,7 @@ function install_MPI()
             tar xfz $HOME/mpich3.2-install/mpich-3.2.tar.gz
             cd $HOME/mpich3.2-install/
             ./configure CC=gcc CXX=g++ F77=gfortran FC=gfortran --prefix=$HOME/mpich3.2-install --enable-fast make make install;;
-            cd $HOME/
+            cd $HOME
         openmpi) set -x;
             sudo apt-get install openmpi-bin openmpi-dev
             export PATH=$HOME/mpich3.1-install/bin:$PATH;;
