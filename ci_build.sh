@@ -27,14 +27,14 @@ function install_trusty_dep()
 	echo "=========================================="
 	time sudo apt-get install cmake
 	echo "=========================================="
+	echo "Installing valgrind"
+    sudo apt-get install valgrind -qq
+    rm valgrind.log*
+	echo "=========================================="
 	time sudo apt-get install gcc -qq
 	time sudo apt-get install g++ -qq
 	echo "=========================================="
     time sudo apt-get install gfortran -qq
-    echo "=========================================="
-    echo "Installing valgrind"
-    sudo apt-get install valgrind -qq
-    rm valgrind.log*
     echo "=========================================="
 	echo "${CXX} will be your compiler"
 	CXX="g++";
