@@ -11,6 +11,7 @@ case $1 in
     
     mkdir $HOME/mpich3.2-install;
     mv mpich-3.2.tar.gz $HOME/mpich3.2-install;
+    tar xfz $HOME/mpich3.2-install/mpich-3.2.tar.gz
     ./configure CC=gcc CXX=g++ F77=gfortran FC=gfortran --prefix=$HOME/mpich3.2-install --enable-fast make make install;;
   openmpi) set -x;
     sudo apt-get install openmpi-bin openmpi-dev
