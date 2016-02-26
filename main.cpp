@@ -11,7 +11,7 @@ double a_funct(double x){
     }
 
 int main() {
-	cout << "Two plus three is " << add(2,3) << endl;
+    cout << "Two plus three is " << add(2,3) << endl;
     int trials = 100000;
     cout << "Using the monte carlo method, the value of pi is about: ";
     cout << approx_pi(trials) << endl;

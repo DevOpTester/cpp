@@ -22,7 +22,7 @@
 // the accuracy increases with trials run
 
 double approx_pi(int n) {
-	int nin = 0;
+    int nin = 0;
     double randmax = double(RAND_MAX);
     for (int i = 0; i < n; ++i) {
         double x = rand()/randmax;

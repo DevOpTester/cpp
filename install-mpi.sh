@@ -3,7 +3,7 @@
 
 # following function install_MPI() adapted from https://github.com/mpi4py/mpi4py/blob/master/conf/travis/install-mpi.sh
 #Author: Lisandro Dalcin
-#Contact:	dalcinl@gmail.com
+#Contact:   dalcinl@gmail.com
 #Copyright (c) 2015, Lisandro Dalcin. All rights reserved.
 
 function install_MPI()
