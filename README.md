@@ -16,23 +16,14 @@ https://github.com/philsquared/Catch
 #### Catch
    - [x] Create simple TEST_CASE () that tests if a function returns expected value
    - [ ] Make use of multiple SECTION () functions within a TEST_CASE ()
-   - [ ] Make use of tags for hiding tests [.]
    - [ ] Create test case that loads external data and runs tests against it
    - [ ] Build set of tests in BDD style  (SCENARIO() --> WHEN() --> THEN())
 
-
-#### Travis
-  Goal : implement method that installs correct dependencies for os type and compiles and runs tests without human
-  * :thumbsdown: ~~Method 1: only use .travis.yml to execute commands~~   *too clunky and not portable* 
-  * :point_right: Method 2: create bash script that detects os type, selects compiler and executes commands 
-    - Linux:
-       - working (within current bounds)
-    - osx:
-      - not yet working    *(need to consult with osx user)*
-
-#### Semaphore
-  - same goals as travis-ci
-  - compare preformance and interface with travis
+#### CI 
+  - [x] Test Travis
+  - [x] Test Semaphore
+  - [ ] Test self-hosted Jenkins
+      - having trouble with webhook
 
 ********************************************************************************************************************/
   
