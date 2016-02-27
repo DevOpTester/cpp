@@ -4,7 +4,7 @@
 #include "main.h"
 
 int add(int a, int b) {
-	return a + b;
+    return a + b;
 }
 
 float add(float a, float b) {
