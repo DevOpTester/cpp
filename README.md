@@ -22,8 +22,9 @@ https://github.com/philsquared/Catch
 #### CI 
   - [x] Test Travis
   - [x] Test Semaphore
-  - [ ] Test self-hosted Jenkins
-      - having trouble with webhook
+  - [x] Test self-hosted Jenkins
+      - using ngrok to host locally
+  - [ ] Test remote hosted Jenkins
 
 ********************************************************************************************************************/
   
