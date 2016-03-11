@@ -25,6 +25,7 @@ https://github.com/philsquared/Catch
   - [x] Test self-hosted Jenkins
       - using ngrok to host locally
   - [ ] Test remote hosted Jenkins
+      - have dependencies allready built on server
 
 ********************************************************************************************************************/
   
