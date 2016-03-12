@@ -1,23 +1,6 @@
 #!/bin/sh
 # Installs PETSc, MPI, compilers, compiles and runs tests and main 
 
-function setup()
-{
-  #mkdir $HOME/sfw
-  #mkdir $HOME/sfw/linux
-  #mkdir $HOME/sfw/linux/fblaslapack/
-  #export FBLASLAPACK_DIR=$HOME/sfw/linux/fblaslapack/
-  #mkdir $HOME/sfw/linux/mpich/
-  #mkdir $HOME/sfw/linux/mpich/mpich2
-  #export MPICH_DIR=$HOME/sfw/linux/mpich/mpich2/
-  #mkdir $HOME/sfw/linux/hypre/
-  #export HYPRE_DIR=$HOME/sfw/linux/hypre/
-  #mkdir $HOME/sfw/linux/boost/
-  #export BOOST_DIR=$HOME/sfw/linux/boost/
-  #mkdir $HOME/sfw/linux/hdf5/ 
-  #export HDF5_DIR=$HOME/sfw/linux/hdf5/
-}
-
 function license_statement()
 {
     echo
@@ -191,7 +174,7 @@ function install_SAMRAI()
 }
 
 #Call functions
-#setup
+
 mkdir $HOME/sfw
 mkdir $HOME/sfw/linux
 license_statement
