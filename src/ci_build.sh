@@ -1,5 +1,5 @@
 #!/bin/sh
-# Installs PETSc, MPI, compilers, compiles and runs tests and main 
+# Installs PETSc, MPI, and more
 
 function license_statement()
 {
@@ -37,18 +37,40 @@ function install_trusty_dep()
     
 }
 
+function install_HDF5()
+{
+  mkdir $HOME/sfw/linux/hdf5
+  cd $HOME/sfw/linux/hdf5
+  wget http://www.hdfgroup.org/ftp/HDF5/current/src/hdf5-1.8.16.tar
+  tar xvfz hdf5-1.8.16.tar.gz
+  cd hdf5-1.8.16
+  ./configure \
+    CC=gcc \
+    CXX=g++ \
+    FC=gfortran \
+    F77=gfortran \
+    --enable-production \
+    --disable-debug \
+    --prefix=$HOME/sfw/linux/hdf5/1.8.16
+  make
+  make check
+  make install
+  export HDF5_DIR=$HOME/sfw/linux/hdf5/1.8.16
+}
+
+
 function install_SILO()
 {
   # Download and install Silo 4.10
   cd $HOME/sfw/linux/
-  mkdir silo-4.10
-  cd silo-4.10
-  export SILO_DIR=$HOME/sfw/linux/silo-4.10
-
+  mkdir silo
+  cd silo
+  
   wget https://wci.llnl.gov/content/assets/docs/simulation/computer-codes/silo/silo-4.10/silo-4.10.tar.gz
 
   tar xvfz silo-4.10.tar.gz
-
+  export SILO_DIR=$HOME/sfw/linux/silo/silo-4.10
+  cd silo-4.10
   ./configure \
     CC=gcc \
     CXX=g++ \
@@ -58,6 +80,28 @@ function install_SILO()
     --disable-silex
   make
   make install
+  export SILO_DIR=$HOME/sfw/linux/silo/4.10
+}
+
+function install_OpenMPI()
+{
+  cd $HOME/sfw/linux/
+  wget https://www.open-mpi.org/software/ompi/v1.10/downloads/openmpi-1.10.2.tar.bz2
+  tar xvfj openmpi-1.10.2.tar.bz2
+  cd openmpi-1.10.2
+  ./configure \
+    CC=gcc \
+    CXX=g++ \
+    FC=gfortran \
+    F77=gfortran \
+    --prefix=$HOME/sfw/linux/openmpi/1.10.2 \
+    --disable-mpi-cxx-seek \
+    --disable-heterogeneous \
+    --enable-orterun-prefix-by-default
+  make
+  make check
+  make install
+  export MPI_DIR=$HOME/sfw/linux/openmpi/1.10.2
 }
 
 function install_PETSc()
@@ -66,33 +110,29 @@ function install_PETSc()
   cd $HOME/sfw/petsc/
   export PETSC_DIR=$HOME/sfw/petsc/
   export PETSC_ARCH=linux-dbg
-  ./configure \
-    --with-cc=gcc \
-    --with-cxx=g++ \
-    --with-fc=gfortran
-    --download-fblaslapack \
-    --download-mpich \
-    --download-hypre \
+  ./config/configure.py \
+    --CC=$HOME/sfw/linux/openmpi/1.8.2/bin/mpicc \
+    --CXX=$HOME/sfw/linux/openmpi/1.8.2/bin/mpicxx \
+    --FC=$HOME/sfw/linux/openmpi/1.8.2/bin/mpif90 \
+    --LDFLAGS="-L$MPI_DIR/lib -Wl,-rpath,$MPI_DIR/lib" \
+    --PETSC_ARCH=$PETSC_ARCH \
     --with-shared-libraries \
-    --download-boost \
-    --download-hdf5 \
-    --PETSC_ARCH=$PETSC_ARC \
-  time make all test 
+    --download-hypre
+  make
+  make test
+ 
   export PETSC_DIR=$PWD
   export PETSC_ARCH=linux-opt
-  ./configure \
-    --with-cc=gcc \
-    --with-cxx=g++ \
-    --with-fc=gfortran
-    --download-fblaslapack \
-    --download-mpich \
-    --download-hypre \
+  ./config/configure.py \
+    --CC=$MPI_DIR/bin/mpicc \
+    --CXX=$MPI_DIR/bin/mpicxx \
+    --FC=$MPI_DIR/bin/mpif90 \
+    --LDFLAGS="-L$MPI_DIR/lib -Wl,-rpath,$MPI_DIR/lib" \
+    --PETSC_ARCH=$PETSC_ARCH \
     --with-shared-libraries \
-    --download-boost \
-    --download-hdf5 \
-    --PETSC_ARCH=$PETSC_ARC \
     --with-debugging=0 \
     --with-x=0 \
+    --download-hypre
   make
   make test
   
@@ -121,10 +161,10 @@ function install_SAMRAI()
     --with-CC=gcc \
     --with-CXX=g++ \
     --with-F77=gfortran \
-    --without-MPICC \
-    --without-hdf5 \
+    --with-MPICC=$MPI_DIR/bin/mpicc \
+    --with-hdf5=$HDF5_DIR \
     --without-hypre \
-    --without-silo \
+    --with-silo=$SILO_DIR \
     --without-blaslapack \
     --without-cubes \
     --without-eleven \
@@ -152,10 +192,10 @@ function install_SAMRAI()
     --with-CC=gcc \
     --with-CXX=g++ \
     --with-F77=gfortran \
-    --without-MPICC \
-    --without-hdf5 \
+    --with-MPICC=$MPI_DIR/bin/mpicc \
+    --with-hdf5=$HDF5_DIR \
     --without-hypre \
-    --without-silo \
+    --with-silo=$SILO_DIR \
     --without-blaslapack \
     --without-cubes \
     --without-eleven \
@@ -165,8 +205,8 @@ function install_SAMRAI()
     --without-x \
     --with-doxygen \
     --with-dot \
-    --disable-debug \
-    --enable-opt \
+    --enable-debug \
+    --disable-opt \
     --enable-implicit-template-instantiation \
     --disable-deprecated
   make
@@ -179,6 +219,7 @@ mkdir $HOME/sfw
 mkdir $HOME/sfw/linux
 license_statement
 install_trusty_dep
+install_HDF5
 install_SILO
 install_PETSc
 install_SAMRAI
