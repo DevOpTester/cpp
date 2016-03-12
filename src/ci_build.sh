@@ -7,7 +7,8 @@ function setup()
   mkdir $HOME/sfw/linux
   mkdir $HOME/sfw/linux/fblaslapack/
   export FBLASLAPACK_DIR=$HOME/sfw/linux/fblaslapack/
-  mkdir $HOME/sfw/linux/mpich/mpich2/
+  mkdir $HOME/sfw/linux/mpich/
+  mkdir $HOME/sfw/linux/mpich/mpich2
   export MPICH_DIR=$HOME/sfw/linux/mpich/mpich2/
   mkdir $HOME/sfw/linux/hypre/
   export HYPRE_DIR=$HOME/sfw/linux/hypre/
@@ -86,13 +87,13 @@ function install_PETSc()
     --with-cc=gcc \
     --with-cxx=g++ \
     --with-fc=gfortran
-    --download-fblaslapack=$FBLASLAPACK_DIR \
-    --download-mpich=$MPICH_DIR \
-    --download-hypre=$HYPRE_DIR \
+    --download-fblaslapack \
+    --download-mpich \
+    --download-hypre \
     --with-shared-libraries \
-    --download-boost=$BOOST_DIR \
-    --download-hdf5=$HDF5_DIR \
-    --PETSC_ARCH=$PETSC_ARCH \
+    --download-boost \
+    --download-hdf5 \
+    --PETSC_ARCH=$PETSC_ARC \
   time make all test 
   export PETSC_DIR=$PWD
   export PETSC_ARCH=linux-opt
@@ -100,13 +101,13 @@ function install_PETSc()
     --with-cc=gcc \
     --with-cxx=g++ \
     --with-fc=gfortran
-    --download-fblaslapack=$FBLASLAPACK_DIR \
-    --download-mpich=$MPICH_DIR \
-    --download-hypre=$HYPRE_DIR \
+    --download-fblaslapack \
+    --download-mpich \
+    --download-hypre \
     --with-shared-libraries \
-    --download-boost=$BOOST_DIR \
-    --download-hdf5=$HDF5_DIR \
-    --PETSC_ARCH=$PETSC_ARCH \
+    --download-boost \
+    --download-hdf5 \
+    --PETSC_ARCH=$PETSC_ARC \
     --with-debugging=0 \
     --with-x=0 \
   make
@@ -137,10 +138,10 @@ function install_SAMRAI()
     --with-CC=gcc \
     --with-CXX=g++ \
     --with-F77=gfortran \
-    --with-MPICC=$MPICH_DIR \
-    --with-hdf5=$HDF5_DIR \
+    --without-MPICC \
+    --without-hdf5 \
     --without-hypre \
-    --with-silo=$SILO_DIR \
+    --without-silo \
     --without-blaslapack \
     --without-cubes \
     --without-eleven \
@@ -168,10 +169,10 @@ function install_SAMRAI()
     --with-CC=gcc \
     --with-CXX=g++ \
     --with-F77=gfortran \
-    --with-MPICC=$MPICH_DIR \
-    --with-hdf5=$HDF5_DIR \
+    --without-MPICC \
+    --without-hdf5 \
     --without-hypre \
-    --with-silo=$SILO_DIR \
+    --without-silo \
     --without-blaslapack \
     --without-cubes \
     --without-eleven \
@@ -190,7 +191,7 @@ function install_SAMRAI()
 }
 
 #Call functions
-setup
+#setup
 license_statement
 install_trusty_dep
 install_SILO
