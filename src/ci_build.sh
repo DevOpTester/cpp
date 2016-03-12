@@ -23,18 +23,19 @@ function install_trusty_dep()
     echo "Installing dependencies for ${OSTYPE}";
     echo
     echo "=========================================="
-    time sudo apt-get update -qq
+    time sudo apt-get update -y
     echo "Installing valgrind"
     sudo apt-get install valgrind -y
     rm valgrind.log*
     echo "=========================================="
     echo "=========================================="
     time sudo apt-get install cmake
+    sudo apt-get install libreadline6 -y
     echo "=========================================="
-    time sudo apt-get install gcc -qq
-    time sudo apt-get install g++ -qq
+    time sudo apt-get install gcc -y
+    time sudo apt-get install g++ -y
     echo "=========================================="
-    time sudo apt-get install gfortran -qq
+    time sudo apt-get install gfortran -y
     echo "=========================================="
     echo "${CXX} will be your compiler"
     CXX="g++";
@@ -44,8 +45,7 @@ function install_PETSc()
 {
   time git clone -b maint https://bitbucket.org/petsc/petsc $HOME/petsc
   cd $HOME/petsc/
-  time ./configure --with-cc=gcc --with-cxx=g++ --with-fc=gfortran
-  --download-fblaslapack --download-mpich --download-hypre
+  time ./configure --with-cc=gcc --with-cxx=g++ --with-fc=gfortran --download-fblaslapack --download-mpich --download-hypre --download-boost --download-hdf5
   time make all test 
   cd $HOME 
 } 
