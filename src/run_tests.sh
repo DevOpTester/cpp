@@ -11,6 +11,6 @@ echo "                           Running Catch tests                          "
 echo "*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~"
 echo 
 
-${CXX} catchDef.cpp tests.cpp approx.cpp add.cpp -o tests
-./tests
-rm "tests"
+${CXX} src/catchDef.cpp src/tests.cpp src/approx.cpp src/add.cpp -o bin/tests
+./bin/tests
+rm "bin/tests"

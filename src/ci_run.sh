@@ -1,6 +1,5 @@
 #!/bin/bash
-# Detects operating system type, runs preferred compiler,
-# executes tests, and cleans up.
+# compiles, executes tests, and cleans up.
 
 function run_tests()
 {
@@ -11,9 +10,9 @@ function run_tests()
     echo "                         Running Catch tests                          "
     echo "*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~"
     echo 
-    ${CXX} catchDef.cpp tests.cpp approx.cpp add.cpp -o tests
-    ./tests -s
-    rm "tests"
+    ${CXX} src/catchDef.cpp src/tests.cpp src/approx.cpp src/add.cpp -o bin/tests
+    ./bin/tests -s
+    rm "bin/tests"
 }
 
 function run_main()
@@ -29,17 +28,14 @@ function run_main()
     echo "              !!!!!!!Hello this is the main function!!!!!!              "
     echo "*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~"
     echo 
-    ${CXX} main.cpp approx.cpp add.cpp -o main
+    ${CXX} src/main.cpp src/approx.cpp src/add.cpp -o bin/main
     echo "Compiled. Now run main:"
-    ./main
-    valgrind ./main
+    ./bin/main
+    valgrind ./bin/main
     echo "End of run"
-    rm "main"
+    rm "bin/main"
     echo "Files cleaned up"
 }
 
-echo "Currently located at " $PWD 
-cd $HOME/testingCPP
-echo "Now in " $PWD
 run_tests
 run_main

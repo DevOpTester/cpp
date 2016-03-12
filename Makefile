@@ -1,8 +1,10 @@
 CFLAGS=-Wall -g
 
 travis:
-	bash ci_build.sh
+	bash src/ci_build.sh
 main:
-	bash run_main.sh
+	bash src/run_main.sh
 tests: 
-	bash run_tests.sh
+	bash src/run_tests.sh
+cirun:
+	bash src/ci_run.sh

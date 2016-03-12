@@ -96,3 +96,17 @@ bool in_polygon(const Polygon& P, const Point& q) {
 
     return ncross%2 == 1;
 }
+
+/*******************************************
+Calculate the number of paths through an nXm grid
+(n and m must be greater than or equal to 0)
+*******************************************/
+
+int paths(int n, int m) {
+    return combinations(n + m, n);
+}
+
+int combinations(int n, int k) {
+    if (k==0) return 1;
+    return n*combinations(n-1, k-1)/k;
+}

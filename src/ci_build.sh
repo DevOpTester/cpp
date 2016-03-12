@@ -44,7 +44,8 @@ function install_PETSc()
 {
   time git clone -b maint https://bitbucket.org/petsc/petsc $HOME/petsc
   cd $HOME/petsc/
-  time ./configure --with-cc=gcc --with-cxx=g++ --with-fc=gfortran --download-fblaslapack --download-mpich
+  time ./configure --with-cc=gcc --with-cxx=g++ --with-fc=gfortran
+  --download-fblaslapack --download-mpich --download-hypre
   time make all test 
   cd $HOME 
 } 
