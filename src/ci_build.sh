@@ -3,6 +3,7 @@
 
 function setup()
 {
+  mkdir $HOME/sfw
   mkdir $HOME/sfw/linux
   mkdir $HOME/sfw/linux/fblaslapack/
   export FBLASLAPACK_DIR=$HOME/sfw/linux/fblaslapack/
