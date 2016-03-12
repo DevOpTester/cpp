@@ -12,9 +12,9 @@ echo "              !!!!!!!Hello this is the main function!!!!!!              "
 echo "*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~"
 echo 
 
-${CXX} src/main.cpp src/approx.cpp src/add.cpp -o bin/main
+${CXX} main.cpp approx.cpp add.cpp -o main
 echo "Compiled. Now run:"
-./bin/main
+./main
 echo "End of run"
-rm "bin/main"
+rm "main"
 echo "Files cleaned up"

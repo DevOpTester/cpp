@@ -10,9 +10,9 @@ function run_tests()
     echo "                         Running Catch tests                          "
     echo "*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~"
     echo 
-    ${CXX} src/catchDef.cpp src/tests.cpp src/approx.cpp src/add.cpp -o bin/tests
-    ./bin/tests -s
-    rm "bin/tests"
+    ${CXX} catchDef.cpp tests.cpp approx.cpp add.cpp -o tests
+    ./tests
+    rm "tests"
 }
 
 function run_main()
@@ -28,11 +28,11 @@ function run_main()
     echo "              !!!!!!!Hello this is the main function!!!!!!              "
     echo "*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~"
     echo 
-    ${CXX} src/main.cpp src/approx.cpp src/add.cpp -o bin/main
+    ${CXX} main.cpp approx.cpp add.cpp -o main
     echo "Compiled. Now run main:"
-    ./bin/main
+    ./main
     echo "End of run"
-    rm "bin/main"
+    rm "main"
     echo "Files cleaned up"
 }
 
