@@ -1,4 +1,5 @@
 ##Hello Jenkins
 
-Working on those webhooks.
-Hopefully you get triggered to build dev.
+Working on those Jenkins settings.
+Trying it out on a remote webserver.
+Hopefully you get triggered to build.
