@@ -94,14 +94,14 @@ function install_OpenMPI()
     CXX=g++ \
     FC=gfortran \
     F77=gfortran \
-    --prefix=$HOME/sfw/linux/openmpi/1.10.2 \
+    --prefix=$HOME/sfw/linux/openmpi-1.10.2 \
     --disable-mpi-cxx-seek \
     --disable-heterogeneous \
     --enable-orterun-prefix-by-default
   make
   make check
   make install
-  export MPI_DIR=$HOME/sfw/linux/openmpi/1.10.2
+  export MPI_DIR=$HOME/sfw/linux/openmpi-1.10.2
 }
 
 function install_PETSc()
@@ -111,9 +111,7 @@ function install_PETSc()
   export PETSC_DIR=$HOME/sfw/petsc/
   export PETSC_ARCH=linux-dbg
   ./config/configure.py \
-    --CC=$HOME/sfw/linux/openmpi/1.8.2/bin/mpicc \
-    --CXX=$HOME/sfw/linux/openmpi/1.8.2/bin/mpicxx \
-    --FC=$HOME/sfw/linux/openmpi/1.8.2/bin/mpif90 \
+    --with-mpi-dir=$MPI_DIR \
     --LDFLAGS="-L$MPI_DIR/lib -Wl,-rpath,$MPI_DIR/lib" \
     --PETSC_ARCH=$PETSC_ARCH \
     --with-shared-libraries \
