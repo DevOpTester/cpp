@@ -5,6 +5,7 @@ travis:
 main:
 	bash run_main.sh
 tests: 
-	bash run_tests.sh
+	g++ catchDef.cpp tests.cpp approx.cpp add.cpp -o tests
+	./tests
 cirun:
 	bash ci_run.sh
