@@ -20,4 +20,8 @@ double square_root(double a) ;
 double integral(double a, double b, int n, double f(double c)) ;
 bool in_polygon(const Polygon& P, const Point& q) ;
 bool cross( const Polygon& P, const Point& q) ;
+
+int paths(int n, int m) ;
+int combinations(int n, int k) ;
+
 #endif // APPROX_H_INCLUDED  
