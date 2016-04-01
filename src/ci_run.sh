@@ -1,6 +1,5 @@
 #!/bin/bash
-# Detects operating system type, runs preferred compiler,
-# executes tests, and cleans up.
+# compiles, executes tests, and cleans up.
 
 function run_tests()
 {
@@ -12,7 +11,7 @@ function run_tests()
     echo "*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~"
     echo 
     ${CXX} catchDef.cpp tests.cpp approx.cpp add.cpp -o tests
-    ./tests -s
+    ./tests
     rm "tests"
 }
 
@@ -32,14 +31,10 @@ function run_main()
     ${CXX} main.cpp approx.cpp add.cpp -o main
     echo "Compiled. Now run main:"
     ./main
-    valgrind ./main
     echo "End of run"
     rm "main"
     echo "Files cleaned up"
 }
 
-echo "Currently located at " $PWD 
-cd $HOME/testingCPP
-echo "Now in " $PWD
 run_tests
 run_main

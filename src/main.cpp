@@ -35,8 +35,12 @@ int main() {
     struct Point q( 2.0, 3.0);
     struct Point outside( 1.0, 1.0);
     cout << "Print point q (" << q.x << ", " << q.y << ")" << endl;  
-    cout << "Print point p0 (" << p0.x << ", " << p0.y << ")" << endl; 
+    cout << "Print point p0 (" << p0.x << ", " << p0.y << ")" << endl;
     cout << in_polygon(P, q) << endl;
     cout << in_polygon(P, outside) << endl;
+    int x = 5;
+    int y = 5;
+    cout << "The number of paths (using only up and right moves) through your grid\t";
+    cout << paths( x, y ) << endl;
     return 0;
 }
