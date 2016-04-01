@@ -42,5 +42,6 @@ int main() {
     int y = 5;
     cout << "The number of paths (using only up and right moves) through your grid\t";
     cout << paths( x, y ) << endl;
+    cout << "Bye!!" << endl;
     return 0;
 }
