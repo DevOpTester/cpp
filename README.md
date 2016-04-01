@@ -20,7 +20,7 @@ https://github.com/philsquared/Catch
   - [x] Test Semaphore
   - [x] Test self-hosted Jenkins
       - using ngrok to host locally
-  - [ ] Test remote hosted Jenkins
+  - [ ] Test remote hosted Jenkins _(in progress)_
       - have dependencies allready built on server
 
 ********************************************************************************************************************/
