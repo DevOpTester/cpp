@@ -6,13 +6,13 @@
 
 
 TEST_CASE( "Addition of two integers", "[add]" ) {
-  REQUIRE( add(1, 1) == 2 );
+  REQUIRE( add(1, 2) == 3 );
 }
 TEST_CASE( "Addition of two doubles", "[add]" ) {
   double x = 34.0;
-  double y = 72.0;
+  double y = 72.1;
   
-  REQUIRE( add(x, y) == 106.0 );
+  REQUIRE( add(x, y) == 106.1 );
 }
 TEST_CASE( "Addition of two floats", "[add]" ) {
   double x = 3.0;
