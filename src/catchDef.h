@@ -1,4 +1,4 @@
-//catchDef.h
+// catchDef.h
 #ifndef CATCHDEF_H_INCLUDED
 #define CATCHDEF_H_INCLUDED
-#endif // CATCHDEF_H_INCLUDED  
+#endif // CATCHDEF_H_INCLUDED
