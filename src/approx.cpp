@@ -1,7 +1,5 @@
 // approx.cpp
 #include "approx.h"
-#include "catch.hpp"
-#include "main.h"
 #include <cstdlib>
 #include <iostream>
 #include <vector>
@@ -38,13 +36,17 @@ double square_root(double a) {
   // using Newton-Raphson method
   // returns x such that abs(x*x - a) < epsilon
 
-  double x = 1.0; // makes a guess
+  if (a < 0) { // check for negative number
+    return -1.0;
+  } else {
+    double x = 1.0; // makes a guess
 
-  // Iterates using Newton-Raphson recurrence
-  while (abs(x * x - a) >= std::numeric_limits<double>::epsilon())
-    x = 0.5 * (x + a / x);
+    // Iterates using Newton-Raphson recurrence
+    while (abs(x * x - a) >= std::numeric_limits<double>::epsilon())
+      x = 0.5 * (x + a / x);
 
-  return x;
+    return x;
+  }
 }
 
 double integral(double a, double b, int n, double f(double)) {

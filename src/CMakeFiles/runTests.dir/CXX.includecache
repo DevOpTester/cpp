@@ -1,0 +1,32 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/deleeke/Repos/CMS/CI/cpp/src/approx.cpp
+approx.h
+/home/deleeke/Repos/CMS/CI/cpp/src/approx.h
+cstdlib
+-
+iostream
+-
+vector
+-
+
+/home/deleeke/Repos/CMS/CI/cpp/src/approx.h
+cstdlib
+-
+vector
+-
+
+/home/deleeke/Repos/CMS/CI/cpp/src/tests.cpp
+gtest/gtest.h
+-
+approx.cpp
+/home/deleeke/Repos/CMS/CI/cpp/src/approx.cpp
+cmath
+-
+
