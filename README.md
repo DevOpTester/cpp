@@ -6,7 +6,18 @@ Using GitHub Pull Request Builder plugin
 
 Tried out Catch -- 
 https://github.com/philsquared/Catch
-May abandon in favor of Google Test for jUnit xml output compatability (https://github.com/google/googletest/blob/master/googletest/docs/Primer.md)
+I have currently abandoned it in favor of Google Test for jUnit xml output compatability (https://github.com/google/googletest/blob/master/googletest/docs/Primer.md)
+
+Also checkout the branch `CppUnit` for testing out using that framework instead.
+
+##CURRENT MASTER BUILD INSTRUCTIONS:
+```
+cd src/
+cmake CMakeLists.txt
+make
+./runTests --gtest_output="xml:./test_out.xml"
+
+```
 
 See issues or waffle board for more information!
 
