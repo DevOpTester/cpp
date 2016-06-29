@@ -8,8 +8,6 @@ Tried out Catch --
 https://github.com/philsquared/Catch
 I have currently abandoned it in favor of Google Test for jUnit xml output compatability (https://github.com/google/googletest/blob/master/googletest/docs/Primer.md)
 
-Also checkout the branch `CppUnit` for testing out using that framework instead.
-
 ##CURRENT MASTER BUILD INSTRUCTIONS:
 ```
 cd src/
