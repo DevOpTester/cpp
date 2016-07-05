@@ -37,9 +37,6 @@ TEST(ApproxPi, isCloseToARCCOSneg1){
   EXPECT_LE(std::abs(approx_pi(1000000) - acos(-1)), 0.0001);
 }
 
-TEST(NaturalLog, eToTheZero){
-    ASSERT_EQ(std::log(1), std::log(std::exp(0)));
-}
 
 int main( int argc, char** argv ) {
     testing::InitGoogleTest( &argc, argv );
