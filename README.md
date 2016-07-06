@@ -8,14 +8,7 @@ Tried out Catch --
 https://github.com/philsquared/Catch
 I have currently abandoned it in favor of Google Test for jUnit xml output compatability (https://github.com/google/googletest/blob/master/googletest/docs/Primer.md)
 
-##CURRENT MASTER BUILD INSTRUCTIONS:
-```
-cd src/
-cmake CMakeLists.txt
-make
-./runTests --gtest_output="xml:./test_out.xml"
-
-```
+Currently working on splitting out configuration, compilation running unit tests into seperate jobs on Jenkins and seeing how to set seperate commit statuses for each step.
 
 See issues or waffle board for more information!
 
