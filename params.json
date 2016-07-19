@@ -1,0 +1,6 @@
+{
+  "name": "Cpp",
+  "tagline": "Sample repository for testing jenkins configurations",
+  "body": "Testing out Jenkins for a C++ project.\r\n\r\nWaffle Board: [![Stories in Ready](https://badge.waffle.io/DevOpTester/cpp.svg?label=ready&title=Ready)](http://waffle.io/DevOpTester/cpp)\r\n\r\nUsing GitHub Pull Request Builder plugin\r\n\r\nTried out Catch -- \r\nhttps://github.com/philsquared/Catch\r\nI have currently abandoned it in favor of Google Test for jUnit xml output compatability (https://github.com/google/googletest/blob/master/googletest/docs/Primer.md)\r\n\r\n##CURRENT MASTER BUILD INSTRUCTIONS:\r\n```\r\ncd src/\r\ncmake CMakeLists.txt\r\nmake\r\n./runTests --gtest_output=\"xml:./test_out.xml\"\r\n\r\n```\r\n\r\nSee issues or waffle board for more information!\r\n\r\n\r\nNotes: to create xml report of results with gtest, run test executable with --gtest_output=\"xml:${path to output file\r\nhere}\" Note that it will not overwrite a file if it allready exists, it will append a number to the end of the filename.\r\n",
+  "note": "Don't delete this file! It's used internally to help with page regeneration."
+}

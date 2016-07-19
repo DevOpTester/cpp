@@ -1,0 +1,64 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Cpp by DevOpTester</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/github-light.css">
+    <meta name="viewport" content="width=device-width">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Cpp</h1>
+        <p>Sample repository for testing jenkins configurations</p>
+
+        <p class="view"><a href="https://github.com/DevOpTester/cpp">View the Project on GitHub <small>DevOpTester/cpp</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/DevOpTester/cpp/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/DevOpTester/cpp/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/DevOpTester/cpp">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <p>Testing out Jenkins for a C++ project.</p>
+
+<p>Waffle Board: <a href="http://waffle.io/DevOpTester/cpp"><img src="https://badge.waffle.io/DevOpTester/cpp.svg?label=ready&amp;title=Ready" alt="Stories in Ready"></a></p>
+
+<p>Using GitHub Pull Request Builder plugin</p>
+
+<p>Tried out Catch -- 
+<a href="https://github.com/philsquared/Catch">https://github.com/philsquared/Catch</a>
+I have currently abandoned it in favor of Google Test for jUnit xml output compatability (<a href="https://github.com/google/googletest/blob/master/googletest/docs/Primer.md">https://github.com/google/googletest/blob/master/googletest/docs/Primer.md</a>)</p>
+
+<h2>
+<a id="current-master-build-instructions" class="anchor" href="#current-master-build-instructions" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>CURRENT MASTER BUILD INSTRUCTIONS:</h2>
+
+<pre><code>cd src/
+cmake CMakeLists.txt
+make
+./runTests --gtest_output="xml:./test_out.xml"
+
+</code></pre>
+
+<p>See issues or waffle board for more information!</p>
+
+<p>Notes: to create xml report of results with gtest, run test executable with --gtest_output="xml:${path to output file
+here}" Note that it will not overwrite a file if it allready exists, it will append a number to the end of the filename.</p>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/DevOpTester">DevOpTester</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
