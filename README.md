@@ -23,4 +23,4 @@ See issues or waffle board for more information!
 Notes: to create xml report of results with gtest, run test executable with --gtest_output="xml:${path to output file
 here}" Note that it will not overwrite a file if it allready exists, it will append a number to the end of the filename.
 
-Hi my name is Raveena
+Hi my name is Raveena I'm awesome
